@@ -16,11 +16,11 @@ public class Main {
             t.start();
             l.add(serv);
         }
-        Balancer balancer = new RoundRobinBalancer();
+        Balancer balancer = new StatisticalBalancer();
         balancer.setServerPool(l);
-        Thread t = new Thread(new RequestGenerator(balancer,21 ,  140)); //Random doesn't handle but RoundRobin handles
+        //Thread t = new Thread(new RequestGenerator(balancer,21 ,  140)); //Random doesn't handle but RoundRobin handles
         //Thread t = new Thread(new RequestGenerator(balancer,6 , 10));  //RoundRobin doesn't handle but WeightedRoundRobin handles
-        //Thread t = new Thread(new RequestGenerator(balancer,17 , 20)); //WeightedRoundRobin doesn't handle but Statistical handles
+        Thread t = new Thread(new RequestGenerator(balancer,17 , 20)); //WeightedRoundRobin doesn't handle but Statistical handles
         t.start();
         Thread t1 = new Thread(new Outputter(l));
         t1.start();
